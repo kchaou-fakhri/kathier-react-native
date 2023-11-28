@@ -5,7 +5,9 @@
     "paths": {
       "@utils/*": ["src/utils/*"],
       "@contexts/*": ["src/contexts/*"],
-      "@configNavigation/*": ["src/navigation/*"]
+      "@configNavigation/*": ["src/navigation/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json"
