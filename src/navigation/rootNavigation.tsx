@@ -1,5 +1,5 @@
-import {Home} from '@contexts/home';
-import {SplashScreen} from '@contexts/splash';
+import {Home} from '@contexts/home/ui';
+import {SplashScreen} from '@contexts/splash/adapter';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList} from './navigationParams';
 

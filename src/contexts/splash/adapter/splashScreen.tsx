@@ -9,7 +9,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {RootStackParamList} from '@configNavigation/navigationParams';
-import {ProgressBar} from '@components/progressBar';
+import {ProgressBar} from '@components/progress/progressBar';
+import {store} from '@reduxConfig/store';
+import {progressEnd, progressStart} from '../useCases/actions';
+import {Progress} from '@modules/progress';
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList>;
@@ -19,7 +22,13 @@ const SplashScreen = (props: Props): JSX.Element => {
   const width = useSharedValue(180);
   const progress = useSharedValue(0);
 
+  const _progress: Progress = {
+    width: 100,
+    height: 5,
+  };
   useEffect(() => {
+    store.dispatch(progressStart(_progress));
+
     progress.value = withTiming(1, {duration: 2500});
 
     width.value = withTiming(
@@ -37,6 +46,7 @@ const SplashScreen = (props: Props): JSX.Element => {
   }, []);
 
   const handleNavigation = () => {
+    store.dispatch(progressEnd());
     //props.navigation.navigate('Home');
   };
 

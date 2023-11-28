@@ -12,6 +12,8 @@ module.exports = {
           '@configNavigation': './src/navigation/',
           '@assets': './src/assets/',
           '@components': './src/components/',
+          '@reduxConfig': './src/redux_configuration/',
+          '@modules': './src/modules/',
         },
       },
     ],
