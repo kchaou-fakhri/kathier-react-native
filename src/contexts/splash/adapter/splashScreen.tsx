@@ -12,14 +12,12 @@ import Animated, {
 import {RootStackParamList} from '@configNavigation/navigationParams';
 import {ProgressBar} from '@components/progress/progressBar';
 import {store} from '@reduxConfig/store';
-import {progressStart} from '../useCases/actions';
+import {progressStart} from '../../../comman/progress/useCases/actions';
 import {Progress} from '@modules/progress';
-import {useSelector} from 'react-redux';
-import {progressLoadingState} from '../useCases/selectors';
 import {getDeviceDimensions} from '@utils/deviceInfo';
 import {STRINGS} from '@mainAssets/strings/strings';
-import {H3} from '@comman/globalStyles/textStyle';
 import {ROUTES} from '@configNavigation/routes';
+import {GlobalStyles} from '@comman/index';
 interface Props {
   navigation: StackNavigationProp<RootStackParamList>;
 }
@@ -29,7 +27,6 @@ const DELAY = 1500;
 const SplashScreen = (props: Props): JSX.Element => {
   const marginTop = useSharedValue(0);
   const opacity = useSharedValue(0);
-  let loading = useSelector(progressLoadingState);
   const [isCompleted, setIsCompleted] = useState(true);
 
   const _progress: Progress = {
@@ -73,7 +70,7 @@ const SplashScreen = (props: Props): JSX.Element => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[GlobalStyles.container, styles.container]}>
       {isCompleted ? (
         <Animated.Image
           source={IMAGES.LOGO}
@@ -84,7 +81,8 @@ const SplashScreen = (props: Props): JSX.Element => {
         <ProgressBar />
       </Animated.View>
       <View style={styles.textContainer}>
-        <Animated.Text style={[{opacity: opacity}, styles.text, H3]}>
+        <Animated.Text
+          style={[{opacity: opacity}, styles.text, GlobalStyles.H3]}>
           {STRINGS.copyright}
         </Animated.Text>
       </View>
@@ -96,7 +94,6 @@ export {SplashScreen};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: COLORS.white,
     alignItems: 'center',
     justifyContent: 'center',

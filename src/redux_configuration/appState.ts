@@ -1,4 +1,4 @@
-import {ComponentsState} from '@contexts/splash/configuration/state';
+import {ComponentsState} from '@comman/progress/configuration/state';
 
 export interface AppState {
   componentsState: ComponentsState;
