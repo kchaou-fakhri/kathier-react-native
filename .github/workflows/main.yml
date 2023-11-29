@@ -21,7 +21,7 @@ jobs:
     - name: install dependancies
       run: npm install    
     - name: Build Android
-      run: ls
+      run: ./gradlew assembleRelease
       working-directory: android 
 
   release:
