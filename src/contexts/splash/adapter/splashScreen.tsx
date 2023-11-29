@@ -1,63 +1,92 @@
 import {IMAGES} from '@assets/index';
 import {COLORS} from '@utils/colors';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Animated, {
   runOnJS,
   useSharedValue,
+  withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import {RootStackParamList} from '@configNavigation/navigationParams';
 import {ProgressBar} from '@components/progress/progressBar';
 import {store} from '@reduxConfig/store';
-import {progressEnd, progressStart} from '../useCases/actions';
+import {progressStart} from '../useCases/actions';
 import {Progress} from '@modules/progress';
-
+import {useSelector} from 'react-redux';
+import {progressLoadingState} from '../useCases/selectors';
+import {getDeviceDimensions} from '@utils/deviceInfo';
+import {STRINGS} from '@mainAssets/strings/strings';
+import {H3} from '@comman/globalStyles/textStyle';
+import {ROUTES} from '@configNavigation/routes';
 interface Props {
   navigation: StackNavigationProp<RootStackParamList>;
 }
 
+const DELAY = 1500;
+
 const SplashScreen = (props: Props): JSX.Element => {
-  const width = useSharedValue(180);
-  const progress = useSharedValue(0);
+  const marginTop = useSharedValue(0);
+  const opacity = useSharedValue(0);
+  let loading = useSelector(progressLoadingState);
+  const [isCompleted, setIsCompleted] = useState(true);
 
   const _progress: Progress = {
-    width: 100,
-    height: 5,
+    width: 200,
+    height: 8,
   };
   useEffect(() => {
     store.dispatch(progressStart(_progress));
 
-    progress.value = withTiming(1, {duration: 2500});
-
-    width.value = withTiming(
-      200,
-      {
-        duration: 2500,
-      },
-      finished => {
+    marginTop.value = withDelay(
+      DELAY,
+      withTiming(
+        getDeviceDimensions().height / 1.22,
+        {
+          duration: 2500,
+        },
+        finished => {
+          if (finished) {
+            // Animation is finished, trigger navigation
+            runOnJS(movePogress)();
+          }
+        },
+      ),
+    );
+    opacity.value = withDelay(
+      DELAY * 1.6,
+      withTiming(1, {duration: 2000}, finished => {
         if (finished) {
           // Animation is finished, trigger navigation
           runOnJS(handleNavigation)();
         }
-      },
+      }),
     );
   }, []);
+  const movePogress = () => {
+    setIsCompleted(true);
+  };
 
   const handleNavigation = () => {
-    store.dispatch(progressEnd());
-    //props.navigation.navigate('Home');
+    props.navigation.navigate(ROUTES.HOME_SCREEN);
   };
 
   return (
     <View style={styles.container}>
-      <Animated.Image
-        source={IMAGES.LOGO}
-        style={[styles.logo, {width: width}]}
-      />
-      <View style={styles.footer}>
+      {isCompleted ? (
+        <Animated.Image
+          source={IMAGES.LOGO}
+          style={[styles.logo, {opacity: opacity}]}
+        />
+      ) : null}
+      <Animated.View style={[styles.footer, {marginTop: marginTop}]}>
         <ProgressBar />
+      </Animated.View>
+      <View style={styles.textContainer}>
+        <Animated.Text style={[{opacity: opacity}, styles.text, H3]}>
+          {STRINGS.copyright}
+        </Animated.Text>
       </View>
     </View>
   );
@@ -74,9 +103,16 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 180,
+    height: 180,
+    position: 'absolute',
     resizeMode: 'contain',
   },
-  footer: {
-    marginBottom: 50,
+  footer: {},
+  textContainer: {
+    position: 'absolute',
+    bottom: 10,
+  },
+  text: {
+    textAlign: 'center',
   },
 });

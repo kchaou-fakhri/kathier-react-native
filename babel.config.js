@@ -14,6 +14,8 @@ module.exports = {
           '@components': './src/components/',
           '@reduxConfig': './src/redux_configuration/',
           '@modules': './src/modules/',
+          '@mainAssets': './assets/',
+          '@comman': './src/comman/',
         },
       },
     ],

@@ -1,3 +1,4 @@
 import {Progress} from './progress';
+import {Device} from './device';
 
-export type {Progress};
+export type {Progress, Device};
