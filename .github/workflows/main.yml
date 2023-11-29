@@ -1,91 +1,75 @@
+name: Build and Release
+
 on:
   push:
-    branches: [ "develop" ]
+    branches:
+      - develop
+
 jobs:
-  ios-build:
-    name: iOS Dev Build
+  Android:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Show self-hosted machine infomation
-        run: uname -a
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.9.1
-      - name: Checkout repo from develop branch
-        uses: actions/checkout@v3
-        with:
-          ref: develop
-      - name: Install npm dependency
-        run: yarn install
-      - name: Cache cocoapods
-        uses: actions/cache@v3
-        with:
-          path: /ios/Pods
-          key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pods-
-      - name: Install pod dependency
-        run: |
-          cd ios
-          bundle exec pod install
-      - name: Build iOS JS Bundle
-        run: |
-          yarn run package-ios
-      - name: Install bundler
-        run: |
-          cd ios
-          gem install bundler
-      - name: Install gem plugins
-        run: |
-          cd ios
-          bundle install
-      - name: Run fastlane
-        run: |
-          cd ios
-          bundle exec fastlane build_testflight
-  android-build:
-    name: Android Dev Build
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+    - name: install dependancies
+      run: npm install    
+    - name: Grant execute permissions to gradlew
+      run: |
+        chmod +x gradlew
+      working-directory: android
+    - name: Build Android
+      run: ./gradlew assembleRelease
+      working-directory: android 
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: release
+        path: android/app/build/outputs/apk/release/app-release.apk
+  IOS:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Xcode
+      uses: actions/setup-xcode@v2
+      with:
+        xcode-version: '12.5'  # Update with the desired Xcode version
+
+    - name: Build iOS
+      run: |
+        xcodebuild clean build -workspace ios-app.xcworkspace -scheme ios-app -destination generic/platform=iOS
+      working-directory: ios-app  # Update with your iOS project directory
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: ios-build
+        path: ios-app/build/Release-iphoneos
+
+  deploy:
+    needs: [Android, IOS]
     runs-on: ubuntu-latest
+
     steps:
-      - name: Show self-hosted machine infomation
-        run: uname -a
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.9.1
-      - name: Checkout repo from dev branch
-        uses: actions/checkout@v3
-        with:
-          ref: dev
-      - name: Install npm dependency
-        run: yarn install
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Execute Gradle build
-        run: |
-          cd android
-          ./gradlew build
-      - name: Build Android JS Bundle
-        run: |
-          yarn run package-android
-      - name: Delete Android build duplicate assets resource
-        run: yarn run delete-pics
-      - name: Install bundler
-        run: |
-          cd android
-          gem install bundler
-      - name: Install gem plugins
-        run: |
-          cd android
-          bundle install
-      - name: Run fastlane
-        run: |
-          cd android
-          bundle exec fastlane build_qa
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Download iOS artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: ios-build
+        path: ios-app/build/Release-iphoneos
+
+    - name: Deploy artifacts
+      run: |
+        # Add your deployment steps here
+        # This could include copying artifacts to a server, publishing releases, etc.
