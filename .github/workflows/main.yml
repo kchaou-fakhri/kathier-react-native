@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -27,7 +27,11 @@ jobs:
     - name: Build Android
       run: ./gradlew assembleRelease
       working-directory: android 
-
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: release
+        path: android/app/build/outputs/apk/release/app-release.apk
   release:
     runs-on: macos-latest
 
