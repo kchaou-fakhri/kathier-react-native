@@ -4,16 +4,16 @@ on:
 jobs:
   ios-build:
     name: iOS Dev Build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Show self-hosted machine infomation
         run: uname -a
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.9.1
-      - name: Checkout repo from dev branch
+      - name: Checkout repo from develop branch
         uses: actions/checkout@v3
         with:
-          ref: dev
+          ref: develop
       - name: Install npm dependency
         run: yarn install
       - name: Cache cocoapods
@@ -44,7 +44,7 @@ jobs:
           bundle exec fastlane build_testflight
   android-build:
     name: Android Dev Build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Show self-hosted machine infomation
         run: uname -a
