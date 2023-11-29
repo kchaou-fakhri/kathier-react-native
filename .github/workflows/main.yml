@@ -18,13 +18,8 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '11'
-    - name: Grant execute permissions to gradlew
-      run: |
-        chmod +x android/gradlew
-      working-directory: android
     - name: Build Android
-      run: |
-        ./gradlew assembleRelease
+      run: cd android && ./gradlew assembleRelease
       working-directory: android 
 
   release:
