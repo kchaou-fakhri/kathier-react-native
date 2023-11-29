@@ -20,6 +20,10 @@ jobs:
         java-version: '11'
     - name: install dependancies
       run: npm install    
+    - name: Grant execute permissions to gradlew
+      run: |
+        chmod +x gradlew
+      working-directory: android
     - name: Build Android
       run: ./gradlew assembleRelease
       working-directory: android 
