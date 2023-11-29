@@ -1,3 +1,3 @@
-import {H3} from './globalStyles/textStyle';
+import {GlobalStyles} from './globalStyles/textStyle';
 
-export {H3};
+export {GlobalStyles};

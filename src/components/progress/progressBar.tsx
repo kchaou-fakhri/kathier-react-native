@@ -1,7 +1,7 @@
 import {
   progressLoadingState,
   progressState,
-} from '@contexts/splash/useCases/selectors';
+} from '@comman/progress/useCases/selectors';
 import {COLORS} from '@utils/colors';
 import {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';

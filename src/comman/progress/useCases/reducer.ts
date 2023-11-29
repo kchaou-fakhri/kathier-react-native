@@ -2,8 +2,8 @@ import {
   PROGRESS_END,
   PROGRESS_START,
   ProgressActiontypes,
-} from '@contexts/splash/useCases/actionsTypes';
-import {ProgressState} from '@contexts/splash/configuration/state';
+} from '@comman/progress/useCases/actionsTypes';
+import {ProgressState} from '@comman/progress/configuration/state';
 
 const initialState: ProgressState = {
   loading: false,
