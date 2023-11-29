@@ -6,7 +6,7 @@ on:
       - setup-github-actions
 
 jobs:
-  Android:
+  android:
     runs-on: ubuntu-latest
     
     steps:
@@ -32,7 +32,7 @@ jobs:
       with:
         name: release
         path: android/app/build/outputs/apk/release/app-release.apk
-  IOS:
+  ios:
     runs-on: macos-latest
 
     steps:
