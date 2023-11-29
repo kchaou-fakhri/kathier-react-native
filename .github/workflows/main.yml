@@ -19,10 +19,15 @@ jobs:
         distribution: 'adopt'
         java-version: '11'
 
+    - name: Grant execute permissions to gradlew
+      run: |
+        chmod +x android/gradlew
+      working-directory: android
+
     - name: Build Android
       run: |
         ./gradlew assembleRelease
-      working-directory: android  # Update with your Android project directory
+      working-directory: android
 
   release:
     runs-on: macos-latest
@@ -39,7 +44,7 @@ jobs:
     - name: Build iOS
       run: |
         xcodebuild clean build -workspace ios-app.xcworkspace -scheme ios-app -destination generic/platform=iOS
-      working-directory: ios-app  # Update with your iOS project directory
+      working-directory: ios-app
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
@@ -51,17 +56,4 @@ jobs:
     needs: [build, release]
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Download iOS artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: ios-build
-        path: ios-app/build/Release-iphoneos
-
-    - name: Deploy artifacts
-      run: |
-        # Add your deployment steps here
-        # This could include copying artifacts to a server, publishing releases, etc.
+   
