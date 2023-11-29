@@ -5,8 +5,16 @@ import {RootStackParamList} from './navigationParams';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+/**
+ * RootNavigation is the main navigation component that defines the navigation stack.
+ * It includes screens for the SplashScreen and Home.
+ *
+ * @returns {JSX.Element} The RootNavigation component.
+ */
 const RootNavigation = (): JSX.Element => {
   return (
+    // Stack.Navigator contains the stack of screens in the application
+
     <Stack.Navigator>
       <Stack.Screen
         name="Splash"

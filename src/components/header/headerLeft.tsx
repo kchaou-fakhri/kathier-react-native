@@ -10,13 +10,32 @@ interface Props {
   onSearchClicked?: () => void;
   onBookMarkClicked?: () => void;
 }
+
+/**
+ * HeaderLeft is a component representing the left section of the application header.
+ * It includes icons for search and bookmark functionality.
+ *
+ * @component
+ * @param {Props} props - The props of the HeaderLeft component.
+ * @param {boolean} [props.isSearch] - Indicates whether the search icon should be displayed.
+ * @param {boolean} [props.isMarked] - Indicates whether the bookmark icon should be marked.
+ * @param {() => void} [props.onSearchClicked] - Callback function for when the search icon is clicked.
+ * @param {() => void} [props.onBookMarkClicked] - Callback function for when the bookmark icon is clicked.
+ * @returns {JSX.Element} The HeaderLeft component.
+ */
 export const HeaderLeft = (props: Props) => {
   return (
-    <View style={[GlobalStyles.container, styles.conatiner]}>
+    /**
+     * Main container for the HeaderLeft component.
+     */
+    <View style={[GlobalStyles.container, styles.container]}>
+      {/* Pressable for the search icon */}
       <Pressable onPress={props.onSearchClicked}>
+        {/* Search icon */}
         <Image source={IMAGES.IC_SEARCH} style={GlobalStyles.icons} />
       </Pressable>
 
+      {/* Bookmark icon with optional marking based on isMarked prop */}
       <BookMark
         width={24}
         height={24}
@@ -28,7 +47,7 @@ export const HeaderLeft = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  conatiner: {
+  container: {
     flexDirection: 'row',
   },
 });
