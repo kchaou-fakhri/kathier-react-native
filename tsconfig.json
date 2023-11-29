@@ -9,7 +9,9 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@reduxConfig/*": ["src/redux_configuration/*"],
-      "@modules/*": ["src/modules/*"]
+      "@modules/*": ["src/modules/*"],
+      "@mainAssets/*": ["./assets/*"],
+      "@comman/*": ["src/comman/*"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json"

@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Amiri-Bold.ttf",
+      "sha1": "7ef8ec23e521e60b26113f577e4d61bcb7d04bfc"
+    },
+    {
+      "path": "assets/fonts/Amiri-Regular.ttf",
+      "sha1": "54761ecc5c999143024e969a8416465f91edc0e3"
+    }
+  ]
+}
