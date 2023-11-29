@@ -22,7 +22,7 @@ jobs:
     - name: Build Android
       run: |
         ./gradlew assembleRelease
-      working-directory: android-app  # Update with your Android project directory
+      working-directory: android  # Update with your Android project directory
 
   release:
     runs-on: macos-latest
