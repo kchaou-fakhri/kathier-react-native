@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   textContainer: {
     position: 'absolute',
     bottom: 10,
+    marginTop: 10,
   },
   text: {
     textAlign: 'center',
