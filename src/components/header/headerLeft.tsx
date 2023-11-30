@@ -32,7 +32,10 @@ export const HeaderLeft = (props: Props) => {
       {/* Pressable for the search icon */}
       <Pressable onPress={props.onSearchClicked}>
         {/* Search icon */}
-        <Image source={IMAGES.IC_SEARCH} style={GlobalStyles.icons} />
+        <Image
+          source={IMAGES.IC_SEARCH}
+          style={[GlobalStyles.icons, styles.icons]}
+        />
       </Pressable>
 
       {/* Bookmark icon with optional marking based on isMarked prop */}
@@ -40,7 +43,7 @@ export const HeaderLeft = (props: Props) => {
         width={24}
         height={24}
         onPress={props.onBookMarkClicked}
-        color={props.isMarked ? COLORS.primary : 'red'}
+        color={props.isMarked ? COLORS.primary : COLORS.second}
       />
     </View>
   );
@@ -49,5 +52,8 @@ export const HeaderLeft = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+  },
+  icons: {
+    marginLeft: 15,
   },
 });
