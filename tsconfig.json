@@ -11,7 +11,8 @@
       "@reduxConfig/*": ["src/redux_configuration/*"],
       "@modules/*": ["src/modules/*"],
       "@mainAssets/*": ["./assets/*"],
-      "@comman/*": ["src/comman/*"]
+      "@comman/*": ["src/comman/*"],
+      "@services/*": ["src/services/*"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json"

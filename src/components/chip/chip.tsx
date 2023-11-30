@@ -80,7 +80,6 @@ const isPressedStyles = () => {
 const isNotPressedStyles = () => {
   return {
     backgroundColor: COLORS.green_200,
-    color: COLORS.primary,
   };
 };
 

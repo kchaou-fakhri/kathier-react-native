@@ -5,6 +5,7 @@ import {STRINGS} from '@mainAssets/index';
 import {useState} from 'react';
 import {Swiper} from '@components/swiper/swiper';
 import {COLORS} from '@utils/colors';
+import {ListItems} from '@components/index';
 
 export const Home = () => {
   const [isMarked, setIsMarked] = useState(false);
@@ -28,6 +29,9 @@ export const Home = () => {
           onSowraPressed={() => {}}
           onQor2enPressed={() => {}}
         />
+      </View>
+      <View>
+        <ListItems items={[]} />
       </View>
     </View>
   );
