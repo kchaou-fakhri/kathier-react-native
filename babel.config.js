@@ -16,6 +16,7 @@ module.exports = {
           '@modules': './src/modules/',
           '@mainAssets': './assets/',
           '@comman': './src/comman/',
+          '@services': './src/services/',
         },
       },
     ],

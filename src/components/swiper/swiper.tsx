@@ -52,8 +52,8 @@ export const Swiper: React.FC<Props> = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: getDeviceDimensions().width / 1.2,
-    height: 40,
-    backgroundColor: COLORS.second,
+    height: 50,
+    backgroundColor: COLORS.green_100,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
