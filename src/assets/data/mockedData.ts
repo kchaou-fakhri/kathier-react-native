@@ -1,4 +1,4 @@
-const mockedData = [
+export const mockedData = [
   {
     id: '1',
     name: 'الْفَاتِحَة',

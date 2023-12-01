@@ -48,7 +48,13 @@ export const Chip: React.FC<Props> = ({
       {/* TouchableOpacity for making the chip clickable */}
       <TouchableOpacity onPress={onChipPressed} style={styles.container}>
         {/* Text content of the chip */}
-        <Text style={[styles.text]}>{text}</Text>
+        <Text
+          style={[
+            styles.text,
+            {color: isPressed ? COLORS.white : COLORS.primary},
+          ]}>
+          {text}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -66,7 +72,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    color: COLORS.white,
   },
 });
 
@@ -79,7 +84,7 @@ const isPressedStyles = () => {
 
 const isNotPressedStyles = () => {
   return {
-    backgroundColor: COLORS.green_200,
+    backgroundColor: COLORS.second,
   };
 };
 
