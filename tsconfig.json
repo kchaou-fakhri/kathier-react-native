@@ -12,7 +12,8 @@
       "@modules/*": ["src/modules/*"],
       "@mainAssets/*": ["./assets/*"],
       "@comman/*": ["src/comman/*"],
-      "@services/*": ["src/services/*"]
+      "@services/*": ["src/services/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json"

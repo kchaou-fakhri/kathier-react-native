@@ -13,6 +13,6 @@ export const GlobalStyles = StyleSheet.create({
     marginRight: 20,
   },
 
-  H3: {fontFamily: 'Amiri-Regular', fontSize: 12},
-  H2: {fontFamily: 'Amiri-Bold', fontSize: 20},
+  H3: {fontFamily: 'Amiri-Regular', fontSize: 13},
+  H2: {fontFamily: 'Amiri-Bold', fontSize: 18},
 });
