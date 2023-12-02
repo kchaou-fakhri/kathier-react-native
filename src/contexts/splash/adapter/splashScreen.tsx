@@ -18,6 +18,8 @@ import {getDeviceDimensions} from '@utils/deviceInfo';
 import {STRINGS} from '@mainAssets/strings/strings';
 import {ROUTES} from '@configNavigation/routes';
 import {GlobalStyles} from '@comman/index';
+import {loadMetaData} from '../useCases/actionsTypes';
+import {useMetaData} from '@hooks/useMetaData';
 interface Props {
   navigation: StackNavigationProp<RootStackParamList>;
 }
@@ -33,8 +35,10 @@ const SplashScreen = (props: Props): JSX.Element => {
     width: 200,
     height: 8,
   };
+  useMetaData();
   useEffect(() => {
     store.dispatch(progressStart(_progress));
+    store.dispatch(loadMetaData(true));
 
     marginTop.value = withDelay(
       DELAY,
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
   footer: {},
   textContainer: {
     position: 'absolute',
-    bottom: 10,
+    bottom: 0,
     height: 40,
     marginTop: 10,
   },

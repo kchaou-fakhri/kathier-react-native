@@ -1,6 +1,7 @@
 import {combineReducers} from '@reduxjs/toolkit';
 import {AppState} from './appState';
 import {reducerProgress} from '@comman/progress/configuration/rootReducers';
+import {reducerSplash} from '@contexts/splash/configuration/rootReducers';
 
 /**
  * rootReducers is responsible for combining different reducers to create the root reducer for the Redux store.
@@ -12,4 +13,5 @@ import {reducerProgress} from '@comman/progress/configuration/rootReducers';
  */
 export const rootReducers = combineReducers<AppState>({
   componentsState: reducerProgress,
+  splashState: reducerSplash,
 });
