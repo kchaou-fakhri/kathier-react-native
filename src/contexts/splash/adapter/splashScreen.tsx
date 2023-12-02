@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   textContainer: {
     position: 'absolute',
     bottom: 10,
+    height: 40,
     marginTop: 10,
   },
   text: {

@@ -51,7 +51,7 @@ export const Chip: React.FC<Props> = ({
         <Text
           style={[
             styles.text,
-            {color: isPressed ? COLORS.white : COLORS.primary},
+            {color: isPressed ? COLORS.white : COLORS.textColor},
           ]}>
           {text}
         </Text>
