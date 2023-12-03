@@ -20,6 +20,7 @@ import {ROUTES} from '@configNavigation/routes';
 import {GlobalStyles} from '@comman/index';
 import {loadMetaData} from '../useCases/actionsTypes';
 import {useMetaData} from '@hooks/useMetaData';
+import {useUnZipFolder} from '@hooks/useUnZipFolder';
 interface Props {
   navigation: StackNavigationProp<RootStackParamList>;
 }
@@ -37,6 +38,7 @@ const SplashScreen = (props: Props): JSX.Element => {
   };
   useMetaData();
   useEffect(() => {
+    useUnZipFolder();
     store.dispatch(progressStart(_progress));
     store.dispatch(loadMetaData(true));
 

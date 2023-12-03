@@ -18,6 +18,8 @@ module.exports = {
           '@comman': './src/comman/',
           '@services': './src/services/',
           '@hooks': './src/hooks/',
+          '@constants': './src/constants/',
+          '@helpers': './src/helpers/',
         },
       },
     ],
