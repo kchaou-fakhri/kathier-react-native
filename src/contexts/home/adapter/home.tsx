@@ -7,18 +7,15 @@ import {Swiper} from '@components/swiper/swiper';
 import {COLORS} from '@utils/colors';
 import {ListItems} from '@components/index';
 import {getSowraInfo} from '@services/index';
-import {getDeviceDimensions} from '@utils/deviceInfo';
+import {Sowra} from '@modules/sowra';
+import {useSelector} from 'react-redux';
+import {metaDataSelector} from '@contexts/splash/useCases/selectors';
 
 export const Home = () => {
   const [isMarked, setIsMarked] = useState(false);
-  const [data, setData] = useState([]);
-  const getData = async () => {
-    const data = await getSowraInfo();
-    setData(data);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+  const data: Sowra[] = useSelector(metaDataSelector)!!;
+
+  useEffect(() => {}, []);
   return (
     <View style={[GlobalStyles.container, styles.container]}>
       <View>
